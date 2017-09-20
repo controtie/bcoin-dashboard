@@ -7,10 +7,8 @@
     "url": "https://github.com/Bucko13/bcoin-boilerplate"
   },
   "scripts": {
-    "build": "browserify client/src/index.js -t babelify --outfile client/dist/build.js",
-    "watch": "watchify client/src/index.js -t babelify --outfile client/dist/build.js --debug --verbose",
-    "build:react": "browserify client/react-src/index.js --extension=.jsx -t babelify --outfile client/dist/build.js",
-    "watch:react": "watchify client/react-src/index.js --extension=.jsx -t babelify --outfile client/dist/build.js --debug --verbose",
+    "build": "browserify client/src/index.js --outfile client/dist/build.js",
+    "watch": "watchify client/src/index.js --outfile client/dist/build.js --debug --verbose",
     "start-bcoin": "nodemon ./server/bcoin-server.js",
     "start-server": "nodemon ./server/server.js",
     "start-spv": "npm --bcoin_node=spv run start-bcoin"
@@ -20,18 +18,15 @@
   },
   "babel": {
     "presets": [
-      "env"
+      "env",
+      "react"
     ],
     "plugins": [
       "transform-runtime"
     ]
   },
   "browserify": {
-    "extension": [
-      "jsx"
-    ],
     "transform": [
-      "partialify",
       "babelify"
     ]
   },
@@ -48,12 +43,14 @@
     "level-js": "^2.2.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "ws": "^3.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "eslint": "^3.15.0",

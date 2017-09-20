@@ -1,21 +1,15 @@
-import $ from 'jquery';
-import submitAction from './submitAction';
-/* globals
-  window
-*/
+import React from 'react';
+import { render } from 'react-dom';
 
-// export for others scripts to use
-window.$ = $;
-window.jQuery = $;
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        hello worlds!!!
+      </div>
+    );
+  }
+}
 
-$(() => {
-  const indexTemplate = require('./template.html');
-  $('#app').html(indexTemplate);
-  const formActionButton = $('form button');
-  $.get('/node/fee', (data) => {
-    const value = data.rate;
-    $('input[name="fee"]').val(value);
-  });
+render(<App />, document.getElementById('app'));
 
-  formActionButton.on('click', submitAction);
-});
