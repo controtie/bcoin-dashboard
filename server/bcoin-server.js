@@ -1,12 +1,16 @@
 'use strict';
 
 const config = require('../setup/setupUtils').getConfig();
-const bcoin = require('bcoin');
+const mempool = require('./mempool');
+module.exports = config;
+
+/*
 const assert = require('assert');
 
 const co = bcoin.utils.co;
 
 // const util = bcoin.util;
+
 const MTX = bcoin.mtx;
 const Script = bcoin.script;
 const Amount = bcoin.btc.Amount;
@@ -81,3 +85,7 @@ node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
   yield node.sendTX(tx);
   res.send(200, { tx });
 }));
+
+
+*/
+
