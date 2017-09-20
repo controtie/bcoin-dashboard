@@ -1,7 +1,21 @@
 'use strict';
 
+const WebSocket = require('ws');
 const config = require('../setup/setupUtils').getConfig();
-const mempool = require('./mempool');
+const Mempool = require('./mempool');
+
+const wss = new WebSocket.Server({ port: 8080 });
+wss.on('connection', async (ws) => {
+  console.log('new websocket connection opened');
+  
+  const mempool = new Mempool(ws);
+  await mempool.open();
+
+  ws.on('message', (message) => {
+    console.log('received message', message);
+  });
+});
+
 module.exports = config;
 
 /*

@@ -15,13 +15,58 @@ const chain = new Chain({
 });
 const mempool = new Mempool({ chain });
 
-console.log('creating pool');
 const pool = new Pool({
   chain,
   mempool,
   maxPeers: 8,
 });
 
+class MempoolStream {
+  constructor(props) {
+    console.log('initializing new mempool stream');
+    this.ws = props;
+  }
+  async open() {
+    console.log('opening stream');
+    this.ws.send('new mempool stream initialized');
+    console.log('sent stuff');
+    /*
+    (async function() {
+      console.log('opening pool');
+      await pool.open();
+
+      console.log('connecting pool');
+      await pool.connect();
+
+      console.log('syncing');
+      pool.startSync();
+
+      console.log('sync complete! listening for updates');
+      chain.on('block', (block) => {
+        console.log('Added block to blockchain:');
+        console.log(block);
+      });
+
+      mempool.on('tx', (tx) => {
+        console.log('Saw transaction:');
+        console.log(tx.rhash);
+      });
+
+      pool.on('tx', (tx) => {
+        console.log('Saw transaction:');
+        console.log(tx.rhash);
+      });
+    })().catch((err) => {
+      console.log(err.stack);
+      process.exit(1);
+    });
+    */
+  }
+}
+
+module.exports = MempoolStream;
+
+/*
 (async function() {
   console.log('opening pool');
   await pool.open();
@@ -52,3 +97,4 @@ const pool = new Pool({
   process.exit(1);
 });
 
+*/
