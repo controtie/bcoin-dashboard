@@ -1,7 +1,7 @@
 {
-  "name": "bcoin-boilerplate",
+  "name": "bcoin-dashboard",
   "version": "1.0.0",
-  "description": "A boilerplate repo to get started with a bcoin based project",
+  "description": "A bcoin dashboard",
   "repository": {
     "type": "git",
     "url": "https://github.com/Bucko13/bcoin-boilerplate"
@@ -20,9 +20,7 @@
   },
   "babel": {
     "presets": [
-      "es2015",
-      "react",
-      "stage-3"
+      "env"
     ],
     "plugins": [
       "transform-runtime"
@@ -53,11 +51,9 @@
     "request": "^2.79.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-latest": "^6.22.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-preset-stage-3": "^6.22.0",
+    "babel-preset-env": "^1.6.0",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "eslint": "^3.15.0",
