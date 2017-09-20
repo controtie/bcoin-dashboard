@@ -6,6 +6,7 @@
         "import"
     ],
     "rules": {
+      "no-console", "off",
       "import/no-dynamic-require": "off",
       "import/no-extraneous-dependencies": "off",
       "strict": "off",

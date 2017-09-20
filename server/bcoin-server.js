@@ -10,6 +10,7 @@ wss.on('connection', async (ws) => {
   
   const mempool = new Mempool(ws);
   await mempool.open();
+  console.log('MempoolStream setup complete');
 
   ws.on('message', (message) => {
     console.log('received message', message);

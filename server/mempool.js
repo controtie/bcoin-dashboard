@@ -21,80 +21,53 @@ const pool = new Pool({
   maxPeers: 8,
 });
 
+const WSResponse = (type, data) => {
+  return JSON.stringify({ type, data });
+}
+
 class MempoolStream {
   constructor(props) {
-    console.log('initializing new mempool stream');
+    console.log('constructing new MempoolStream');
     this.ws = props;
   }
   async open() {
-    console.log('opening stream');
-    this.ws.send('new mempool stream initialized');
-    console.log('sent stuff');
-    /*
-    (async function() {
-      console.log('opening pool');
-      await pool.open();
+    console.log('opening MempoolStream');
+    this.ws.send(WSResponse('text', 'Opening MempoolStream'));
 
-      console.log('connecting pool');
-      await pool.connect();
+    await pool.open();
+    await pool.connect();
+    pool.startSync();
 
-      console.log('syncing');
-      pool.startSync();
+    console.log('MempoolStream ready');
+    this.ws.send(WSResponse('text', 'MempoolStream ready'));
 
-      console.log('sync complete! listening for updates');
-      chain.on('block', (block) => {
-        console.log('Added block to blockchain:');
-        console.log(block);
+    chain.on('block', (block) => {
+      console.log('Added block to blockchain:');
+      console.log(block);
+
+      let response = WSResponse('block', block);
+      this.ws.send(response, (err) => {
+        if (err) {
+          console.log('ERROR BLOCK:', err);
+        }
       });
-
-      mempool.on('tx', (tx) => {
-        console.log('Saw transaction:');
-        console.log(tx.rhash);
-      });
-
-      pool.on('tx', (tx) => {
-        console.log('Saw transaction:');
-        console.log(tx.rhash);
-      });
-    })().catch((err) => {
-      console.log(err.stack);
-      process.exit(1);
     });
-    */
+
+    mempool.on('tx', (tx) => {
+      console.log('MEMPOOL');
+      console.log(tx);
+
+      let response = WSResponse('mempool', tx);
+      this.ws.send(response, (err) => {
+        if (err) {
+          console.log('ERROR MEMPOOL:', err);
+        }
+      });
+    });
+
+    return;
   }
 }
 
 module.exports = MempoolStream;
 
-/*
-(async function() {
-  console.log('opening pool');
-  await pool.open();
-
-  console.log('connecting pool');
-  await pool.connect();
-
-  console.log('syncing');
-  pool.startSync();
-
-  console.log('sync complete! listening for updates');
-  chain.on('block', (block) => {
-    console.log('Added block to blockchain:');
-    console.log(block);
-  });
-
-  mempool.on('tx', (tx) => {
-    console.log('Saw transaction:');
-    console.log(tx.rhash);
-  });
-
-  pool.on('tx', (tx) => {
-    console.log('Saw transaction:');
-    console.log(tx.rhash);
-  });
-})().catch((err) => {
-  console.log(err.stack);
-  process.exit(1);
-});
-
-*/
