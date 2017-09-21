@@ -6,7 +6,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        Bcoin Dashboard
+        <h2> Bcoin Dashboard </h2>
         <Mempool />
       </div>
     );
