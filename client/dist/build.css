@@ -10,7 +10,7 @@ body {
   text-align: center;
 }
 
-.transaction {
+.transaction-list {
   border: 1px solid black;
   border-radius: 2px;
   width: 600px;
@@ -24,5 +24,31 @@ body {
   border-radius: 2px;
   width: 650px;
   padding: 10px;
+}
+
+.blockchain-container {
+  display: flex;
+}
+.blockchain {
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.block-detail {
+  width: 600px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.chain-entry {
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.selected {
+  color: white;
+  background-color: black;
 }
 

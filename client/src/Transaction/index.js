@@ -1,4 +1,4 @@
-import Transaction from './Transaction';
+import TransactionList from './TransactionList';
 
-export default Transaction;
+export default TransactionList;
 

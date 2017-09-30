@@ -7,11 +7,13 @@ const ChainEntry = props => {
       height,
       merkleRoot,
     } = {},
+    selected,
     getBlock,
   } = props || {};
+  const shortenedHash = hash.slice(0, 32);
   return (
-    <div className='chain-entry' onClick={getBlock}>
-      <div> {hash} </div>
+    <div className={`chain-entry ${selected ? 'selected' : ''}`} onClick={getBlock}>
+      <div> {`${shortenedHash}...`} </div>
       <div> {height} </div>
     </div>
   );
