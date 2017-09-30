@@ -4,6 +4,7 @@ const bcoin = require('bcoin');
 const Chain = bcoin.chain;
 const config = require('../setup/setupUtils').getConfig();
 const WSResponse = require('./utils').WSResponse;
+const rhash = require('./utils').rhash;
 
 const chain = new Chain({
   db: config.db,
@@ -53,9 +54,8 @@ ChainStreamMethods.listen = function() {
 }
 
 ChainStreamMethods.getBlock = async function(hash) {
-  console.log('hash', hash);
-  let block = await this.chain.db.getBlock(hash);
-  console.log('retrieved block', block);
+  const reversedHash = rhash(hash);
+  let block = await this.chain.db.getBlock(reversedHash);
   this.ws.send(WSResponse('block-detail', block));
 }
 

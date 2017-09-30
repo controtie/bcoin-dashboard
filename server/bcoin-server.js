@@ -4,6 +4,7 @@ const WebSocket = require('ws');
 const config = require('../setup/setupUtils').getConfig();
 const Mempool = require('./mempool');
 const ChainStream = require('./blockchain').ChainStream;
+const rhash = require('./utils').rhash;
 
 const wss = new WebSocket.Server({ port: 8080 });
 wss.on('connection', async (ws) => {
