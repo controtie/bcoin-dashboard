@@ -1,7 +1,7 @@
 module.exports = {
   // Network
-  prefix: '/Volumes/DylansBackup/.bcoin/testnet',
-  network: 'testnet',
+  prefix: '/Volumes/DylansBackup/.bcoin/regtest',
+  network: 'regtest',
   db: 'leveldb',
   useWorkers: true,
 
@@ -36,6 +36,8 @@ module.exports = {
   // HTTP
   apiKey: 'bikeshed',
   httpHost: '::',
+  port: 48333,
+  publicPort: 48444,
 
 };
 

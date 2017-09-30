@@ -42,38 +42,30 @@ class Mempool extends React.Component {
     };
   }
   componentDidMount() {
-    /*
     this.webSocket = new WebSocket('ws://localhost:8080');
     this.webSocket.onopen = () => {
-      this.setState(
-        { transactions: this.state.transactions.concat('Websocket opened') },
-      );
+      console.log('websocket opened');
     };
     this.webSocket.onmessage = (response) => {
       const msg = JSON.parse(response.data);
       console.log('message received');
       console.log(msg);
       if (msg.type === 'text') {
+        return;
+      }
+      if (msg.type === 'mempool') {
         this.setState({
           transactions: this.state.transactions.concat(msg.data),
         });
       }
-      if (msg.type === 'mempool') {
-        this.setState({
-          transactions: this.state.transactions.concat(msg.data.hash),
-        });
-      }
     };
     this.webSocket.onclose = () => {
-      this.setState(
-        { transactions: this.state.transactions.concat('connection closed') }
-      );
+      console.log('connection closed');
     }
-    */
   }
   render() {
     return (
-      <div>
+      <div className="mempool">
         <h2> Mempool </h2>
         {
           this.state.transactions.map((data, key) => {

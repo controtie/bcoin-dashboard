@@ -1,4 +1,4 @@
-import Mempool from './mempool';
+import Mempool from './Mempool';
 
 export default Mempool;
 
