@@ -33,8 +33,8 @@ ChainStreamMethods.getLatestBlocks = async function(currentHeight) {
   const blocks = []; // blocks are stored in 'ChainDB' as 'ChainEntry's
   if (currentHeight > 5) {
     await async function() {
-      let retrieveBlockHeight = currentHeight - 5;
-      while (retrieveBlockHeight < currentHeight) {
+      let retrieveBlockHeight = currentHeight - 10;
+      while (retrieveBlockHeight <= currentHeight) {
         let entry = await chain.db.getEntry(retrieveBlockHeight);
         blocks.push(entry);
         retrieveBlockHeight++;
@@ -48,15 +48,17 @@ ChainStreamMethods.listen = function() {
   this.ws.send(WSResponse('text', 'Listening for new blocks'));
   this.chain.on('block', (block) => {
     let response = WSResponse('block', block)
-    console.log('NEW response', response);
     this.ws.send(response);
   });
 }
 
 ChainStreamMethods.getBlock = async function(hash) {
   const reversedHash = rhash(hash);
-  let block = await this.chain.db.getBlock(reversedHash);
-  this.ws.send(WSResponse('block-detail', block));
+  const block = await this.chain.db.getBlock(reversedHash);
+  const blockHeight = await this.chain.db.getHeight(reversedHash);
+  const blockWithHeight =
+    Object.assign({}, JSON.parse(JSON.stringify(block)), { height: blockHeight });
+  this.ws.send(WSResponse('block-detail', blockWithHeight));
 }
 
 module.exports = {
