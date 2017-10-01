@@ -6,6 +6,7 @@ const BlockDetail = (props) => {
     details,
     details: {
       hash,
+      height,
       merkleRoot,
       txs,
     } = {},
@@ -25,6 +26,7 @@ const BlockDetail = (props) => {
       <p>{hash}</p>
       <p>Merkle Root</p>
       <p>{merkleRoot}</p>
+      <p>{`Height: ${height}`}</p>
       <TransactionList transactions={txs} />
     </div>
   );

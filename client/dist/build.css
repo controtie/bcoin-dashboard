@@ -10,30 +10,45 @@ body {
   text-align: center;
 }
 
-.transaction-list {
+.mempool-container {
+  display: flex;
   border: 1px solid black;
   border-radius: 2px;
-  width: 600px;
 }
 
 .mempool {
   display: flex;
   flex-direction: column;
-  align-items: center;
   border: 1px solid black;
-  border-radius: 2px;
-  width: 650px;
-  padding: 10px;
+  width: 400px;
+  color: white;
+  background-color: black;
+}
+
+.transaction-list {
+  border: 1px solid black;
+  color: black;
+  background-color: white;
 }
 
 .blockchain-container {
   display: flex;
-}
-.blockchain {
-  width: 400px;
-  height: 400px;
   border: 1px solid black;
   border-radius: 2px;
+  overflow: scroll;
+}
+
+.chain-entry-container {
+  height: 400px;
+  width: 400px;
+  overflow: scroll;
+  color: white;
+  background-color: black;
+}
+
+.chain-entries {
+  color: black;
+  background-color: white;
 }
 
 .block-detail {

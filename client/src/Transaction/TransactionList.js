@@ -25,10 +25,15 @@ class TransactionList extends React.Component {
             const {
               hash,
             } = tx || {};
-            return <div key={hash} className='transaction'>
-              <p>Hash</p>
-              <p>{tx.hash}</p>
-            </div>
+            const firstHashSection = hash.slice(0, 33);
+            const secondHashSection = hash.slice(33);
+            return (
+              <div key={hash} className='transaction'>
+                <p>Hash</p>
+                <p>{firstHashSection}</p>
+                <p>{secondHashSection}</p>
+              </div>
+            );
           })
         }
       </div>
