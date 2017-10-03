@@ -31,6 +31,10 @@ body {
   background-color: white;
 }
 
+.transaction-detail {
+  width: 400px;
+}
+
 .blockchain-container {
   display: flex;
   border: 1px solid black;
@@ -52,7 +56,7 @@ body {
 }
 
 .block-detail {
-  width: 600px;
+  width: 400px;
   border: 1px solid black;
   border-radius: 2px;
 }

@@ -4,7 +4,6 @@ const WebSocket = require('ws');
 const config = require('../setup/setupUtils').getConfig();
 const Mempool = require('./mempool');
 const ChainStream = require('./blockchain').ChainStream;
-const rhash = require('./utils').rhash;
 
 const wss = new WebSocket.Server({ port: 8080 });
 wss.on('connection', async (ws) => {
@@ -13,7 +12,7 @@ wss.on('connection', async (ws) => {
   await chain.open();
   await chain.listen();
 
-  const mempool = new Mempool(ws);
+  const mempool = Mempool(ws);
   await mempool.open();
   console.log('MempoolStream setup complete');
 

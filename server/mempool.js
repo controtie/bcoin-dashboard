@@ -18,35 +18,32 @@ const pool = new Pool({
   publicPort: config.publicPort,
 });
 
+const MempoolStream = (ws) => {
+  const mempoolstream = Object.create(MempoolStreamMethods);
+  mempoolstream.ws = ws;
+  mempoolstream.mempool = mempool;
+  return mempoolstream;
+}
 
-class MempoolStream {
-  constructor(props) {
-    this.ws = props;
-    this.ws.send(WSResponse('text', 'Constructing new MempoolStream'));
-  }
-  async open() {
-    this.ws.send(WSResponse('text', 'Opening MempoolStream'));
+const MempoolStreamMethods = {};
 
-    await pool.open();
-    await pool.connect();
-    pool.startSync();
+MempoolStreamMethods.open = async function() {
+  this.ws.send(WSResponse('text', 'Opening MempoolStream'));
 
-    this.ws.send(WSResponse('text', 'MempoolStream ready'));
+  await pool.open();
+  await pool.connect();
+  pool.startSync();
 
-    mempool.on('tx', (tx) => {
-      console.log('MEMPOOL');
-      console.log(tx);
-
-      let response = WSResponse('mempool', tx);
-      this.ws.send(response, (err) => {
-        if (err) {
-          console.log('ERROR MEMPOOL:', err);
-        }
-      });
+  mempool.on('tx', (tx) => {
+    let response = WSResponse('mempool', tx);
+    console.log('saw new tx', tx);
+    this.ws.send(response, (err) => {
+      if (err) {
+        console.log('ERROR MEMPOOL:', err);
+      }
     });
-
-    return;
-  }
+  });
+  return;
 }
 
 module.exports = MempoolStream;

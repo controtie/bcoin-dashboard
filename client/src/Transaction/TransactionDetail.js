@@ -13,7 +13,7 @@ const TransactionDetail = props => {
 
   return (
     <div className='transaction-detail'>
-      <p>Hash</p>
+      <h3>Hash</h3>
       <p>{firstHashSection}</p>
       <p>{secondHashSection}</p>
       <p>Inputs</p>
